@@ -6,10 +6,10 @@ const nodemailer = require("nodemailer");
 const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 587,
-    secure: false, // true for port 465, false for other ports
+    secure: false, // Use false for port 587, true for port 465
     auth: {
-        user: "bilal.akkari845@gmail.com", // Replace with your email
-        pass: "cloz ivoh pobj kmep", // Replace with your app password
+        user: process.env.EMAIL, // Email stored in .env file
+        pass: process.env.PASSWORD, // App password stored in .env file
     },
 });
 
@@ -78,15 +78,14 @@ async function sendEmail(orderDetails) {
 
 
 // Route to send an email
-router.post('/sendEmailChawkat', (req, res) => {
-    console.log(req.body)
-
-    sendEmail(req.body, (error, info) => {
-        if (error) {
-            return res.status(500).json({ success: false, message: 'Failed to send email', error });
-        }
+router.post('/sendEmailChawkat', async (req, res) => {
+    try {
+        const info = await sendEmail(req.body); // Await the sendEmail function
         res.status(200).json({ success: true, message: 'Email sent successfully', info });
-    });
+    } catch (error) {
+        console.error('Error sending email:', error);
+        res.status(500).json({ success: false, message: 'Failed to send email', error });
+    }
 });
 
 module.exports = router;
