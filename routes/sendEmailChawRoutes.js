@@ -60,7 +60,7 @@ async function sendEmail(orderDetails) {
 
     const mailOptions = {
         from: process.env.GMAIL_USER,  // Sender email
-        to: 'bilal.akkari1032@gmail.com',  // Recipient email (or the customer's email)
+        to: 'Chaw321@hotmail.com',  // Recipient email (or the customer's email)
         subject: 'New Order Notification',
         text: emailContent, // Dynamic email content with order details
     };
