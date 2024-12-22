@@ -25,9 +25,9 @@ async function checkPostalCode(postal_code) {
     const formatted_postal_code = cleaned_postal_code.slice(0, 3) + ' ' + cleaned_postal_code.slice(3);
 
     if (formatted_postal_code.length === 7 && users.includes(formatted_postal_code)) {
-        return "Hi, and welcome, you are in the delivery area :)";
+        return "Hi, you are in the delivery area";
     } else {
-        return "Sorry, but you are not in the delivery area :(";
+        return "Sorry, but you are not in the delivery area";
     }
 }
 
