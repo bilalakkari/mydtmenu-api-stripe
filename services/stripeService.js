@@ -1,6 +1,9 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
+// Create a Payment Intent (for processing one-time payments)
 async function createPaymentIntent(amount) {
+    console.log(amount);
+
     const paymentIntent = await stripe.paymentIntents.create({
         amount,
         currency: 'cad',
@@ -8,4 +11,6 @@ async function createPaymentIntent(amount) {
     return paymentIntent.client_secret;
 }
 
-module.exports = { createPaymentIntent };
+module.exports = {
+    createPaymentIntent
+};
