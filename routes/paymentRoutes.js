@@ -77,18 +77,25 @@ router.post('/subscribe', async (req, res) => {
 const sendPortalEmail = async (email, portalUrl) => {
     // Set up your email transport options
     const transporter = nodemailer.createTransport({
-        host: "smtp.gmail.com",
-        port: 465,
-        secure: true,
+        // host: "smtp.gmail.com",
+        // port: 465,
+        // secure: true,
+        // auth: {
+        //     user: "bilal.akkari845@gmail.com",  // Your email address
+        //     pass: "clozivohpobjkmep",  // Your app password
+        // },
+        host: "mail.privateemail.com", // Namecheap's Private Email SMTP server
+        port: 587, // Recommended port for secure connections with STARTTLS
+        secure: false, // Use `false` if you're using STARTTLS; otherwise, `true` for SSL/TLS
         auth: {
-            user: "bilal.akkari845@gmail.com",  // Your email address
-            pass: "clozivohpobjkmep",  // Your app password
+            user: "info@mydtmenu.com", // Replace with your Namecheap Private Email address
+            pass: "LALIBAKKARI18@a", // Replace with your email account password or app-specific password
         },
     });
 
     // Construct the email content
     const mailOptions = {
-        from: "bilal.akkari845@gmail.com",  // Sender address
+        from: "info@mydtmenu.com",  // Sender address
         to: email,  // Receiver's email
         subject: 'Update Your Subscription or Payment Info',
         text: `Click the link below to manage your subscription and payment details:
