@@ -30,5 +30,4 @@ async function checkPostalCode(postal_code) {
         return "Sorry, but you are not in the delivery area";
     }
 }
-
 module.exports = { checkPostalCode };
