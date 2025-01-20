@@ -86,7 +86,7 @@ const sendPortalEmail = async (email, portalUrl) => {
         // },
         host: "mail.privateemail.com", // Namecheap's Private Email SMTP server
         port: 587, // Recommended port for secure connections with STARTTLS
-        secure: false, // Use `false` if you're using STARTTLS; otherwise, `true` for SSL/TLS
+        secure: true, // Use `false` if you're using STARTTLS; otherwise, `true` for SSL/TLS
         auth: {
             user: "info@mydtmenu.com", // Replace with your Namecheap Private Email address
             pass: "LALIBAKKARI18@a", // Replace with your email account password or app-specific password
