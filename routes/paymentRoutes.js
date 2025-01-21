@@ -40,7 +40,10 @@ router.post('/subscribe', async (req, res) => {
         // Step 3: Retrieve the plan's price ID (use your database or hardcode it)
         let priceId = '';
         if (planId === '1') {
-            priceId = 'price_1QanIrGEbUPRSeVEXhUhZF36';
+            priceId = 'price_1QjdwoIyZCutpIAh8mAVEQJM';
+        }
+        else if (planId === '2') {
+            priceId = 'price_1QjdzJIyZCutpIAhuIwxa0EW'
         }
 
         // Step 4: Create a subscription if not already subscribed

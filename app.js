@@ -8,6 +8,7 @@ const paymentRoutes = require('./routes/paymentRoutes');
 const postalRoutes = require('./routes/postalRoutes');
 const utilityRoutes = require('./routes/utilityRoutes');
 const sendEmailChawRoutes = require('./routes/sendEmailChawRoutes')
+const sendEmail = require('./routes/sendEmail');
 
 const app = express();
 app.use(cors());
@@ -18,6 +19,7 @@ app.use('/api', paymentRoutes);
 app.use('/api', postalRoutes);
 app.use('/api', utilityRoutes);
 app.use('/api', sendEmailChawRoutes);
+app.use('/api', sendEmail);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Server running on http://localhost:${port}`));

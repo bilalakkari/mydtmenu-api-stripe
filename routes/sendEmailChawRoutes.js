@@ -76,8 +76,6 @@ async function sendEmail(orderDetails) {
     }
 }
 
-
-
 // Route to send an email
 router.post('/sendEmailChawkat', async (req, res) => {
     try {
