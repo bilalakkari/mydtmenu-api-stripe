@@ -1,25 +1,41 @@
 const fs = require("fs");
 const express = require("express");
 const axios = require("axios");
-
 const router = express.Router();
+
+// Ensure httpsAgent is defined if needed
+const https = require("https");
+const agent = new https.Agent({ rejectUnauthorized: false }); // Adjust this based on your security needs
 
 router.post("/call-api", async (req, res) => {
     try {
-        const apiUrl = "https://bilalakkari01-001-site3.ntempurl.com/api/DataNew";
+        const apiUrl = "https://localhost:7003/api/DataNew";
+        const { router: apiRoute, payload, month, year } = req.body; // Destructure correctly
 
-        const { router, payload } = req.body; // Expecting `apiUrl` and `payload` from request body
-
-        if (!apiUrl) {
-            return res.status(400).json({ error: "API URL is required" });
+        // Validate input
+        if (!apiRoute) {
+            return res.status(400).json({ error: "API route is required" });
+        }
+        if (!payload) {
+            return res.status(400).json({ error: "Payload is required" });
         }
 
-        // Make the POST request to the external API
-        const response = await axios.post(apiUrl + router, payload);
+        const fullUrl = `${apiUrl}${apiRoute}?month=${month}&year=${year}`;
+        console.log(`Calling external API: ${fullUrl}`);
 
+        // Make the POST request to the external API
+        const response = await axios.post(fullUrl, payload, { httpsAgent: agent });
+
+        if (!response.data) {
+            return res.status(404).json({ error: "No data found for this month and year" });
+        }
+
+        console.log("External API response:", response.data);
+
+        // Extract data if necessary
         const dataExtract = await extract(response.data);
 
-        // Send back the response from the external API
+        // Return successful response
         res.json({
             message: "API call successful",
             externalData: dataExtract
@@ -27,12 +43,28 @@ router.post("/call-api", async (req, res) => {
 
     } catch (error) {
         console.error("Error calling external API:", error.message);
+
+        // Handle specific error cases
+        if (error.response) {
+            if (error.response.status === 404 || error.response.data === "No data found for this month and year") {
+                return res.status(404).json({ error: "No data found for this month and year" });
+            }
+            return res.status(error.response.status).json({
+                error: "External API error",
+                details: error.response.data
+            });
+        }
+
+        // Return 500 for any other errors
         res.status(500).json({
             error: "Failed to call external API",
-            details: error.response ? error.response.data : error.message
+            details: error.message
         });
     }
 });
+
+module.exports = router;
+
 
 router.post("/json", (req, res) => {
     try {
@@ -82,6 +114,7 @@ async function extract(users) {
             invoiceObj.dates[timeKey].InvoiceDetails.push({
                 invoice_details_id: detail.invoice_details_id,
                 description: detail.description,
+                date: detail.date,
             });
         });
 
