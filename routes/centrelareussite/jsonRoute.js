@@ -9,7 +9,8 @@ const agent = new https.Agent({ rejectUnauthorized: false }); // Adjust this bas
 
 router.post("/call-api", async (req, res) => {
     try {
-        const apiUrl = "https://localhost:7003/api/DataNew";
+        // const apiUrl = "https://localhost:7003/api/DataNew";
+        const apiUrl = "https://bilalakkari01-001-site3.ntempurl.com/api/DataNew"
         const { router: apiRoute, payload, month, year } = req.body; // Destructure correctly
 
         // Validate input
