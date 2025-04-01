@@ -10,7 +10,7 @@ const agent = new https.Agent({ rejectUnauthorized: false }); // Adjust this bas
 router.post("/call-api", async (req, res) => {
     try {
         // const apiUrl = "https://localhost:7003/api/DataNew";
-        const apiUrl = "https://bilalakkari01-001-site3.ntempurl.com/api/DataNew"
+        const apiUrl = "https://testing-ct-api-mupq5hph.ghaymah.cloud/api/DataNew"
         const { router: apiRoute, payload, month, year } = req.body; // Destructure correctly
 
         // Validate input
@@ -22,7 +22,7 @@ router.post("/call-api", async (req, res) => {
         }
 
         const fullUrl = `${apiUrl}${apiRoute}?month=${month}&year=${year}`;
-        console.log(`Calling external API: ${fullUrl}`);
+        // console.log(`Calling external API: ${fullUrl}`);
 
         // Make the POST request to the external API
         const response = await axios.post(fullUrl, payload, { httpsAgent: agent });
@@ -31,7 +31,7 @@ router.post("/call-api", async (req, res) => {
             return res.status(404).json({ error: "No data found for this month and year" });
         }
 
-        console.log("External API response:", response.data);
+        // console.log("External API response:", response.data);
 
         // Extract data if necessary
         const dataExtract = await extract(response.data);
