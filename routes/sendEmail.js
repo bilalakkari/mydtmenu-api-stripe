@@ -5,14 +5,25 @@ const nodemailer = require('nodemailer');
 // Email sending function
 const sendPortalEmail = async (email) => {
     try {
+        // // Set up your email transport options
+        // const transporter = nodemailer.createTransport({
+        //     host: "mail.privateemail.com", // Namecheap's Private Email SMTP server
+        //     port: 587, // STARTTLS port
+        //     secure: false, // Use false for STARTTLS, true for SSL/TLS
+        //     auth: {
+        //         user: "info@mydtmenu.com", // Your Namecheap Private Email address
+        //         pass: "LALIBAKKARI18@a", // Your email account password or app-specific password
+        //     },
+        // });
+
         // Set up your email transport options
         const transporter = nodemailer.createTransport({
-            host: "mail.privateemail.com", // Namecheap's Private Email SMTP server
-            port: 587, // STARTTLS port
-            secure: false, // Use false for STARTTLS, true for SSL/TLS
+            host: "smtp.gmail.com", // Namecheap's Private Email SMTP server
+            port: 465, // STARTTLS port
+            secure: true, // Use false for STARTTLS, true for SSL/TLS
             auth: {
-                user: "info@mydtmenu.com", // Your Namecheap Private Email address
-                pass: "LALIBAKKARI18@a", // Your email account password or app-specific password
+                user: "bilal.akkari101@gmail.com", // Your Namecheap Private Email address
+                pass: "fycl yzrc mlcb qjic", // Your email account password or app-specific password
             },
         });
 
