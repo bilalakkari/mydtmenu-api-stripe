@@ -9,6 +9,7 @@ const postalRoutes = require('./routes/postalRoutes');
 const utilityRoutes = require('./routes/utilityRoutes');
 const sendEmailChawRoutes = require('./routes/sendEmailChawRoutes')
 const sendEmail = require('./routes/sendEmail');
+const sendMessageLamia = require('./routes/centrelareussite/sendEmailToLamia')
 
 // centrelareussite routes
 const jsonRoute = require('./routes/centrelareussite/jsonRoute');
@@ -27,6 +28,7 @@ app.use('/api', sendEmail);
 
 // centrelareussite api
 app.use("/api/jsonRoute", jsonRoute);
+app.use("/api/sendMessageLamia", sendMessageLamia);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Server running on http://localhost:${port}`));
