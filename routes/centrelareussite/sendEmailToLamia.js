@@ -30,7 +30,7 @@ const sendPortalEmail = async (data) => {
         // Construct the email content
         const mailOptions = {
             from: '"Centre LaReussite', // Sender address
-            to: "bilal.akkari845@gmail.com", // Receiver's email
+            to: "centrelareussite1@gmail.com", // Receiver's email
             subject: 'You got a new Message',
             text: `
                 Name : ${data.name}
