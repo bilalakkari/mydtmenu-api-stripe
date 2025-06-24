@@ -10,7 +10,7 @@ const agent = new https.Agent({ rejectUnauthorized: false }); // Adjust this bas
 router.post("/call-api", async (req, res) => {
     try {
         // const apiUrl = "https://localhost:7003/api/DataNew";
-        const apiUrl = "https://testing-ct-api-mupq5hph.ghaymah.cloud/api/DataNew"
+        const apiUrl = "https://ct-api-ed9817043587.hosted.ghaymah.systems/api/DataNew"
         const { router: apiRoute, payload, month, year } = req.body; // Destructure correctly
 
         // Validate input
